@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NLE8EJyo868=",
+  "dgSpecHash": "FE1QgIvY16Y=",
   "success": true,
-  "projectFilePath": "D:\\SWD305\\SWD305\\SWD305.csproj",
+  "projectFilePath": "d:\\SWD305\\SWD305\\SWD305.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\THINH\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\THINH\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

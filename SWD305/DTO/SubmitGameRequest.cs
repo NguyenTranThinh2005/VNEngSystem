@@ -1,8 +1,8 @@
-﻿namespace SWD305.DTO
+namespace SWD305.DTO
 {
     public class SubmitGameRequest
     {
-        public List<AnswerDto> Answers { get; set; }
+        public List<AnswerDto> Answers { get; set; } = new();
     }
 
     public class AnswerDto

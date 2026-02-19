@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SWD305.DTO;
 using SWD305.Models;
@@ -22,6 +22,24 @@ namespace SWD305.Controllers
         {
             var games = await _context.Games
                 .Include(g => g.Map)
+                .Select(g => new
+                {
+                    g.Id,
+                    g.MapId,
+                    g.Name,
+                    g.GameType,
+                    g.Flow,
+                    g.OrderIndex,
+                    g.IsPremium,
+                    Map = new
+                    {
+                        g.Map.Id,
+                        g.Map.Name,
+                        g.Map.GradeId,
+                        g.Map.OrderIndex,
+                        g.Map.IsActive
+                    }
+                })
                 .ToListAsync();
 
             return Ok(games);
@@ -33,7 +51,26 @@ namespace SWD305.Controllers
         {
             var game = await _context.Games
                 .Include(g => g.Map)
-                .FirstOrDefaultAsync(g => g.Id == id);
+                .Where(g => g.Id == id)
+                .Select(g => new
+                {
+                    g.Id,
+                    g.MapId,
+                    g.Name,
+                    g.GameType,
+                    g.Flow,
+                    g.OrderIndex,
+                    g.IsPremium,
+                    Map = new
+                    {
+                        g.Map.Id,
+                        g.Map.Name,
+                        g.Map.GradeId,
+                        g.Map.OrderIndex,
+                        g.Map.IsActive
+                    }
+                })
+                .FirstOrDefaultAsync();
 
             if (game == null)
                 return NotFound();
@@ -62,7 +99,16 @@ namespace SWD305.Controllers
             _context.Games.Add(game);
             await _context.SaveChangesAsync();
 
-            return Ok(game);
+            return Ok(new
+            {
+                game.Id,
+                game.MapId,
+                game.Name,
+                game.GameType,
+                game.Flow,
+                game.OrderIndex,
+                game.IsPremium
+            });
         }
 
         // UPDATE
@@ -82,7 +128,16 @@ namespace SWD305.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(game);
+            return Ok(new
+            {
+                game.Id,
+                game.MapId,
+                game.Name,
+                game.GameType,
+                game.Flow,
+                game.OrderIndex,
+                game.IsPremium
+            });
         }
 
         // DELETE

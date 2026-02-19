@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SWD305.DTO;
 using SWD305.Models;
@@ -41,12 +41,20 @@ namespace SWD305.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateQuestionDto dto)
         {
+            var gameExists = await _context.Games.AnyAsync(g => g.Id == dto.GameId);
+            if (!gameExists)
+            {
+                return BadRequest("GameId does not exist.");
+            }
+
             var question = new Question
             {
                 GameId = dto.GameId,
                 Data = dto.Data,
                 QuestionType = dto.QuestionType,
-                IsActive = dto.IsActive
+                Difficulty = dto.Difficulty,
+                Explanation = dto.Explanation,
+                IsActive = dto.IsActive ?? true
             };
 
             _context.Questions.Add(question);
@@ -57,15 +65,23 @@ namespace SWD305.Controllers
 
         // UPDATE
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, CreateQuestionDto dto)
+        public async Task<IActionResult> Update(int id, UpdateQuestionDto dto)
         {
             var question = await _context.Questions.FindAsync(id);
             if (question == null) return NotFound();
 
+            var gameExists = await _context.Games.AnyAsync(g => g.Id == dto.GameId);
+            if (!gameExists)
+            {
+                return BadRequest("GameId does not exist.");
+            }
+
             question.GameId = dto.GameId;
             question.Data = dto.Data;
             question.QuestionType = dto.QuestionType;
-            question.IsActive = dto.IsActive;
+            question.Difficulty = dto.Difficulty;
+            question.Explanation = dto.Explanation;
+            question.IsActive = dto.IsActive ?? question.IsActive;
 
             await _context.SaveChangesAsync();
 

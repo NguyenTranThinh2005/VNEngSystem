@@ -51,6 +51,9 @@ namespace SWD305.Controllers
             {
                 GameId = dto.GameId,
                 Data = dto.Data,
+                Answer = dto.Answer,
+                ImageUrl = dto.ImageUrl,
+                AudioUrl = dto.AudioUrl,
                 QuestionType = dto.QuestionType,
                 Difficulty = dto.Difficulty,
                 Explanation = dto.Explanation,
@@ -78,6 +81,9 @@ namespace SWD305.Controllers
 
             question.GameId = dto.GameId;
             question.Data = dto.Data;
+            question.Answer = dto.Answer;
+            question.ImageUrl = dto.ImageUrl;
+            question.AudioUrl = dto.AudioUrl;
             question.QuestionType = dto.QuestionType;
             question.Difficulty = dto.Difficulty;
             question.Explanation = dto.Explanation;

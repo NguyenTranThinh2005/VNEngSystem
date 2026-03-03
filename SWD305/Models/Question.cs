@@ -15,6 +15,12 @@ public partial class Question
 
     public string Data { get; set; } = null!;
 
+    public string Answer { get; set; } = null!;
+
+    public string? ImageUrl { get; set; }
+
+    public string? AudioUrl { get; set; }
+
     public string? Explanation { get; set; }
 
     public bool? IsActive { get; set; }

@@ -25,7 +25,10 @@ namespace SWD305.Controllers
                     q.Id,
                     q.QuestionType,
                     q.Difficulty,
-                    q.Data,  
+                    q.Data,
+                    q.Answer,
+                    q.ImageUrl,
+                    q.AudioUrl
                 })
                 .ToListAsync();
 

@@ -54,6 +54,9 @@ namespace SWD305.Controllers
                 {
                     q.Id,
                     q.Data,
+                    q.Answer,
+                    q.ImageUrl,
+                    q.AudioUrl,
                     q.QuestionType,
                     q.Difficulty
                 })
@@ -89,39 +92,38 @@ namespace SWD305.Controllers
 
             var questions = await _context.Questions
                 .Where(q => answeredQuestionIds.Contains(q.Id))
-                .Select(q => new { q.Id, q.Data })
+                .Select(q => new { q.Id, q.Data, q.Answer })
                 .ToListAsync();
 
-            var questionDataById = questions.ToDictionary(q => q.Id, q => q.Data);
+            var questionInfoById = questions.ToDictionary(q => q.Id, q => q);
             var correctQuestionIds = new HashSet<int>();
             var wrongQuestionIds = new HashSet<int>();
 
             foreach (var item in request.Answers)
             {
-                if (!questionDataById.TryGetValue(item.QuestionId, out var data)) continue;
+                if (!questionInfoById.TryGetValue(item.QuestionId, out var qInfo)) continue;
 
                 bool isCorrectChoice = false;
-                try
+
+                // qInfo.Answer might be a straightforward exact string like "1" or a JSON array like "[1]"
+                if (qInfo.Answer == item.SelectedAnswerId.ToString())
                 {
-                    var json = JsonDocument.Parse(data);
-                    var answers = json.RootElement.GetProperty("answers");
-
-                    foreach (var answer in answers.EnumerateArray())
+                    isCorrectChoice = true;
+                }
+                else
+                {
+                    try
                     {
-                        int id = answer.GetProperty("id").GetInt32();
-                        bool isCorrect = answer.GetProperty("isCorrect").GetBoolean();
-
-                        if (id == item.SelectedAnswerId)
+                        var answerArray = JsonSerializer.Deserialize<List<int>>(qInfo.Answer);
+                        if (answerArray != null && answerArray.Contains(item.SelectedAnswerId))
                         {
-                            isCorrectChoice = isCorrect;
-                            break;
+                            isCorrectChoice = true;
                         }
                     }
-                }
-                catch
-                {
-                    // If question JSON is malformed, treat as wrong
-                    isCorrectChoice = false;
+                    catch
+                    {
+                        // Ignore parse errors, treat as wrong
+                    }
                 }
 
                 if (isCorrectChoice)

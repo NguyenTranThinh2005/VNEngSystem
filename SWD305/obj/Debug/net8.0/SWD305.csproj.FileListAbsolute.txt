@@ -145,3 +145,4 @@ D:\SWD305\SWD305\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching
 D:\SWD305\SWD305\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\SWD305\SWD305\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 d:\SWD305\SWD305\obj\Debug\net8.0\SWD305.sourcelink.json
+D:\SWD305\SWD305\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

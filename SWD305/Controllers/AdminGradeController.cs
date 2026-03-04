@@ -2,8 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SWD305.Models;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace SWD305.Controllers
 {
+    [Authorize(Roles = "admin")]
     [ApiController]
     [Route("api/admin/grades")]
     public class AdminGradeController : ControllerBase

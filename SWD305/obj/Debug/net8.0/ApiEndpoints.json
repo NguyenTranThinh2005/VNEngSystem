@@ -395,6 +395,48 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "SWD305.Controllers.AdminTeamController",
+    "Method": "GetAll",
+    "RelativePath": "api/admin/teams",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD305.Controllers.AdminTeamController",
+    "Method": "GetById",
+    "RelativePath": "api/admin/teams/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD305.Controllers.AdminTeamController",
+    "Method": "DeleteTeam",
+    "RelativePath": "api/admin/teams/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "SWD305.Controllers.AdminUserController",
     "Method": "GetAll",
     "RelativePath": "api/admin/users",
@@ -578,6 +620,64 @@
       {
         "Name": "gameId",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD305.Controllers.TeamOwnerController",
+    "Method": "UpdateTeam",
+    "RelativePath": "api/team-owner/{teamId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teamId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "SWD305.DTO.UpdateTeamDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD305.Controllers.TeamOwnerController",
+    "Method": "DeleteTeam",
+    "RelativePath": "api/team-owner/{teamId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teamId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SWD305.Controllers.TeamOwnerController",
+    "Method": "RemoveMember",
+    "RelativePath": "api/team-owner/{teamId}/remove-member",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "teamId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "SWD305.DTO.RemoveMemberDto",
         "IsRequired": true
       }
     ],

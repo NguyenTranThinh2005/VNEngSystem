@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SWD305.Models;
 
@@ -16,9 +17,9 @@ public partial class Question
     public string Data { get; set; } = null!;
 
     public string Answer { get; set; } = null!;
-
+    [Column("image_url")]
     public string? ImageUrl { get; set; }
-
+    [Column("audio_url")]
     public string? AudioUrl { get; set; }
 
     public string? Explanation { get; set; }

@@ -3,8 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using SWD305.DTO;
 using SWD305.Models;
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace SWD305.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/admin/maps")]
     [ApiController]
     public class AdminMapController : ControllerBase
